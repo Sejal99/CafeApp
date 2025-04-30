@@ -9,12 +9,12 @@ export const useUserStore = create(set => ({
   fetchUsers: async () => {
     try {
       const response = await axios.get(
-        'https://jsonplaceholder.typicode.com/users',
+        'https://coffee-shop-api-sandy.vercel.app/api/v1/products',
       );
-      set({ users: response.data, isLoading: false });
+      set({users: response.data, isLoading: false});
     } catch (error) {
       console.error('Failed to fetch users:', error);
-      set({ error: 'Failed to fetch users', isLoading: false }); 
+      set({error: 'Failed to fetch users', isLoading: false});
     }
   },
 }));
@@ -28,4 +28,3 @@ export const useUserStore = create(set => ({
 // Store updated (set)
 //    ↓
 // Component auto re-rendered with users
-
