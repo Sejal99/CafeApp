@@ -1,5 +1,12 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, SafeAreaView} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  SafeAreaView,
+  TextInput,
+} from 'react-native';
 import {Images} from '../assets';
 
 const Header = () => {
@@ -19,6 +26,16 @@ const Header = () => {
           <Image source={Images.cartIcon} style={styles.iconImage} />
         </View>
       </View>
+      <View style={styles.searchContainer}>
+        <Image source={Images.searchIcon} style={styles.searchIcon} />
+        <TextInput
+          placeholder="Search"
+          style={styles.searchInput}
+          placeholderTextColor="#999"
+        />
+
+        <Image source={Images.filterIcon} style={styles.filterIcon} />
+      </View>
     </SafeAreaView>
   );
 };
@@ -32,7 +49,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 10,
-    height: 50,
+    height: 150,
+    bottom: 20,
   },
   headerContent: {
     flexDirection: 'row',
@@ -65,6 +83,33 @@ const styles = StyleSheet.create({
     height: 24,
     marginLeft: 10,
     tintColor: 'white',
+  },
+  searchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 12,
+    margin: 10,
+    paddingHorizontal: 10,
+    elevation: 2,
+    bottom: 70,
+  },
+  searchIcon: {
+    width: 20,
+    height: 20,
+    tintColor: '#888',
+    marginRight: 8,
+  },
+  searchInput: {
+    flex: 1,
+    height: 40,
+    fontSize: 16,
+    color: '#000',
+  },
+  filterIcon: {
+    width: 20,
+    height: 20,
+    marginLeft: 8,
   },
 });
 

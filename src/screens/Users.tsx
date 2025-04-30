@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -6,17 +6,70 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
+  PermissionsAndroid,
+  Platform,
 } from 'react-native';
 import {useUserStore} from '../store/userStore';
 import Header from '../components/Header';
+import Geolocation from 'react-native-geolocation-service';
+import {Images} from '../assets';
+import {useCartStore} from '../store/cartStore';
 
 const UserListScreen = () => {
   const {users, fetchUsers} = useUserStore();
-  console.log('users', users);
-
+  const [itemsInCart, setItemsInCart] = useState(0);
+  const [hasLocationPermission, setHasLocationPermission] = useState(false);
+  const {addToCart, cartItems} = useCartStore();
   useEffect(() => {
     fetchUsers();
+    console.log('ssss', users);
   }, []);
+
+  const requestLocationPermission = async () => {
+    if (Platform.OS === 'android') {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        );
+        setHasLocationPermission(
+          granted === PermissionsAndroid.RESULTS.GRANTED,
+        );
+      } catch (err) {
+        console.warn(err);
+      }
+    } else {
+      setHasLocationPermission(true);
+    }
+  };
+
+  useEffect(() => {
+    requestLocationPermission();
+  }, []);
+
+  useEffect(() => {
+    if (hasLocationPermission) {
+      Geolocation.getCurrentPosition(
+        position => {
+          console.log(position);
+        },
+        error => {
+          console.log('sejal', error.code, error.message);
+        },
+        {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+      );
+    }
+  }, [hasLocationPermission]);
+
+  const handleAdd = (item: any) => {
+    console.log('item', item);
+
+    setItemsInCart(prev => prev + 1);
+    addToCart(item);
+  };
+
+  useEffect(() => {
+    // console.log('items in cart', itemsInCart);
+  }, [itemsInCart]);
 
   const renderItem = ({item}: {item: any}) => (
     <View style={styles.item}>
@@ -25,7 +78,9 @@ const UserListScreen = () => {
 
       <View style={styles.priceRow}>
         <Text style={styles.email}>${item.price}</Text>
-        <TouchableOpacity style={styles.plusButton}>
+        <TouchableOpacity
+          style={styles.plusButton}
+          onPress={() => handleAdd(item)}>
           <Text style={styles.plusText}>+</Text>
         </TouchableOpacity>
       </View>
@@ -35,6 +90,18 @@ const UserListScreen = () => {
   return (
     <View style={styles.container}>
       <Header />
+      <View style={styles.overlayBox}>
+        <View style={styles.textContainer}>
+          <Text style={styles.text}>Promo</Text>
+          <View style={styles.textView}>
+            <Text style={styles.textStyle}>Buy one get</Text>
+            <Text style={styles.textStyle}> one FREE</Text>
+          </View>
+        </View>
+
+        <Image source={Images.coffee} style={styles.coffeeImage} />
+      </View>
+
       <FlatList
         data={users}
         keyExtractor={item => item.id.toString()}
@@ -55,6 +122,7 @@ const styles = StyleSheet.create({
   },
   list: {
     padding: 20,
+    top: 50,
   },
   item: {
     marginBottom: 20,
@@ -103,5 +171,46 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 10,
+  },
+  overlayBox: {
+    position: 'absolute',
+    top: 230,
+    alignSelf: 'center',
+    height: 100,
+    width: 300,
+    backgroundColor: '#F2D2BD',
+    borderRadius: 10,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  },
+  coffeeImage: {
+    width: 110,
+    height: 102,
+    resizeMode: 'cover',
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+  },
+  text: {
+    backgroundColor: 'red',
+    color: 'white',
+    width: 50,
+    textAlign: 'center',
+    borderRadius: 3,
+    right: 10,
+  },
+  textContainer: {
+    marginVertical: 10,
+    alignItems: 'center',
+  },
+  textView: {
+    alignItems: 'center',
+    marginHorizontal: 10,
+    top: 10,
+  },
+  textStyle: {
+    left: 20,
+    fontSize: 20,
+    fontWeight: 600,
+    color: '#80461B',
   },
 });
