@@ -6,10 +6,16 @@ import {
   Image,
   SafeAreaView,
   TextInput,
+  TouchableOpacity,
 } from 'react-native';
 import {Images} from '../assets';
+import {useNavigation} from '@react-navigation/native';
 
 const Header = () => {
+  const navigation = useNavigation();
+  const handleGoToCart = () => {
+    navigation.navigate('AddToCart');
+  };
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -22,9 +28,9 @@ const Header = () => {
           </View>
         </View>
 
-        <View style={styles.cartIcon}>
+        <TouchableOpacity style={styles.cartIcon} onPress={handleGoToCart}>
           <Image source={Images.cartIcon} style={styles.iconImage} />
-        </View>
+        </TouchableOpacity>
       </View>
       <View style={styles.searchContainer}>
         <Image source={Images.searchIcon} style={styles.searchIcon} />

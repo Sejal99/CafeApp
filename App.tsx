@@ -25,6 +25,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import CounterScreen from './src/screens/Home';
 import UserListScreen from './src/screens/Users';
+import RootNavigator from './src/navigation';
 
 type SectionProps = PropsWithChildren<{
   title: string;
@@ -74,10 +75,7 @@ function App(): React.JSX.Element {
    */
   const safePadding = '5%';
 
-  return (
-    // <CounterScreen/>
-    <UserListScreen />
-  );
+  return <RootNavigator />;
 }
 
 const styles = StyleSheet.create({

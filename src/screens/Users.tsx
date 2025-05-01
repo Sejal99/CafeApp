@@ -68,7 +68,7 @@ const UserListScreen = () => {
   };
 
   useEffect(() => {
-    // console.log('items in cart', itemsInCart);
+    console.log('items in cart', itemsInCart);
   }, [itemsInCart]);
 
   const renderItem = ({item}: {item: any}) => (
@@ -90,6 +90,7 @@ const UserListScreen = () => {
   return (
     <View style={styles.container}>
       <Header />
+
       <View style={styles.overlayBox}>
         <View style={styles.textContainer}>
           <Text style={styles.text}>Promo</Text>
@@ -98,7 +99,6 @@ const UserListScreen = () => {
             <Text style={styles.textStyle}> one FREE</Text>
           </View>
         </View>
-
         <Image source={Images.coffee} style={styles.coffeeImage} />
       </View>
 
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
   },
   list: {
     padding: 20,
-    top: 50,
+    marginVertical: 30,
   },
   item: {
     marginBottom: 20,
