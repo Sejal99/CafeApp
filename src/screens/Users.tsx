@@ -14,12 +14,14 @@ import Header from '../components/Header';
 import Geolocation from 'react-native-geolocation-service';
 import {Images} from '../assets';
 import {useCartStore} from '../store/cartStore';
+import AddToCartCounter from '../components/AddToCartCounter';
 
 const UserListScreen = () => {
   const {users, fetchUsers} = useUserStore();
   const [itemsInCart, setItemsInCart] = useState(0);
   const [hasLocationPermission, setHasLocationPermission] = useState(false);
-  const {addToCart, cartItems} = useCartStore();
+  const {addToCart, cartItems, updateQuantity} = useCartStore();
+
   useEffect(() => {
     fetchUsers();
     console.log('ssss', users);
@@ -71,21 +73,33 @@ const UserListScreen = () => {
     console.log('items in cart', itemsInCart);
   }, [itemsInCart]);
 
-  const renderItem = ({item}: {item: any}) => (
-    <View style={styles.item}>
-      <Image source={{uri: item.image}} style={styles.image} />
-      <Text style={styles.name}>{item.title}</Text>
+  const renderItem = ({item}: {item: any}) => {
+    const cartItem = cartItems.find(cartItem => cartItem.id === item.id);
+    const quantity = cartItem?.quantity || 0;
 
-      <View style={styles.priceRow}>
-        <Text style={styles.email}>${item.price}</Text>
-        <TouchableOpacity
-          style={styles.plusButton}
-          onPress={() => handleAdd(item)}>
-          <Text style={styles.plusText}>+</Text>
-        </TouchableOpacity>
+    return (
+      <View style={styles.item}>
+        <Image source={{uri: item.image}} style={styles.image} />
+        <Text style={styles.name}>{item.title}</Text>
+        <View style={styles.priceRow}>
+          <Text style={styles.email}>${item.price}</Text>
+          {quantity > 0 ? (
+            <AddToCartCounter
+              initialCount={quantity}
+              onChange={newQty => updateQuantity(item.id, newQty)}
+              containerStyle={styles.h2}
+            />
+          ) : (
+            <TouchableOpacity
+              style={styles.plusButton}
+              onPress={() => handleAdd(item)}>
+              <Text style={styles.plusText}>+</Text>
+            </TouchableOpacity>
+          )}
+        </View>
       </View>
-    </View>
-  );
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -131,7 +145,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flex: 1,
     marginHorizontal: 10,
-    height: 200,
+    // height: 200,
     marginVertical: 20,
   },
   name: {
@@ -212,5 +226,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 600,
     color: '#80461B',
+  },
+  h2: {
+    left: 15,
   },
 });

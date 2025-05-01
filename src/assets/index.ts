@@ -6,6 +6,7 @@ export const Images = {
   star: require('./star.png'),
   menu: require('./smoothie.png'),
   heart: require('./heart.png'),
-
+  coffeeIcon: require('./coffeeIcon.png'),
   home: require('./home.png'),
+  user: require('./user.png'),
 };

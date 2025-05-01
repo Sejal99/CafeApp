@@ -19,6 +19,25 @@ export const useUserStore = create(set => ({
   },
 }));
 
+export const useFetchMenu = create(set => ({
+  items: [],
+  isLoading: false,
+  error: null,
+  fetchMenu: async () => {
+    try {
+      const response = await axios.get(
+        'https://api.sampleapis.com/coffee/iced',
+      );
+      console.log('response', response.data);
+
+      set({items: response.data, isLoading: false});
+    } catch (error) {
+      console.error('Failed to fetch items:', error);
+      set({error: 'Failed to fetch items', isLoading: false});
+    }
+  },
+}));
+
 // Component Mounts
 //    ↓
 // fetchUsers() call

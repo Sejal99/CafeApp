@@ -29,7 +29,7 @@ const Header = () => {
         </View>
 
         <TouchableOpacity style={styles.cartIcon} onPress={handleGoToCart}>
-          <Image source={Images.cartIcon} style={styles.iconImage} />
+          <Image source={Images.user} style={styles.iconImage} />
         </TouchableOpacity>
       </View>
       <View style={styles.searchContainer}>

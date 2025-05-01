@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
-const AddToCartCounter = ({initialCount = 0, onChange}) => {
+const AddToCartCounter = ({initialCount = 0, onChange, containerStyle}) => {
   const [count, setCount] = useState(initialCount);
 
   const increment = () => {
@@ -17,7 +17,7 @@ const AddToCartCounter = ({initialCount = 0, onChange}) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle]}>
       <TouchableOpacity onPress={decrement} style={styles.button}>
         <Text style={styles.buttonText}>–</Text>
       </TouchableOpacity>
@@ -38,17 +38,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 8,
-    borderWidth: 2,
-    borderColor: '#c67c4e',
     paddingHorizontal: 5,
     paddingVertical: 5,
-    // alignSelf: 'flex-start',
+    width: 120,
+    alignSelf: 'flex-start',
+    justifyContent: 'center',
   },
   button: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    backgroundColor: '#800020',
-    borderRadius: 6,
+    backgroundColor: '#D27D2D',
+    width: 30,
+    height: 30,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   buttonText: {
     fontSize: 20,
@@ -56,7 +58,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   countText: {
-    marginHorizontal: 15,
+    marginHorizontal: 5,
     fontSize: 18,
     fontWeight: '500',
   },

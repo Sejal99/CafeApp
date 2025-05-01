@@ -5,32 +5,57 @@ import {styles} from './styles';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Images} from '../../assets';
 import AddToCartCounter from '../../components/AddToCartCounter';
+import {useFetchMenu} from '../../store/userStore';
 
 const AddToCart = () => {
   const {cartItems, removeFromCart, clearCart, updateQuantity} = useCartStore();
-  console.log('cart items', cartItems);
-  const renderItem = ({item}: {item: any}) => (
-    <View style={styles.item}>
-      <Image source={{uri: item.image}} style={styles.image} />
-      <View style={styles.textView}>
-        <Text style={styles.name}>{item.title}</Text>
-        <View style={{flexDirection: 'row', marginHorizontal: 10}}>
-          <Image source={Images.star} style={{height: 20, width: 20}} />
-          <Text style={styles.rating}>{item.rating.rate}</Text>
+
+  const renderItem = ({item}: {item: any}) => {
+    const cartItem = cartItems.find(cartItem => cartItem.id === item.id);
+    const quantity = cartItem?.quantity || 0;
+    return (
+      <View style={styles.item}>
+        <Image source={{uri: item.image}} style={styles.image} />
+        <View style={styles.textView}>
+          <Text style={styles.name}>{item.title}</Text>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              marginHorizontal: 10,
+              alignItems: 'center',
+            }}>
+            <Image source={Images.star} style={{height: 20, width: 20}} />
+            <Text style={styles.rating}>{item?.rating?.rate}</Text>
+          </View>
+
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            <Text style={styles.email}>${item.price}</Text>
+            <AddToCartCounter
+              initialCount={item.quantity || 1}
+              onChange={newQty => {
+                if (newQty === 0) {
+                  removeFromCart(item.id);
+                } else {
+                  updateQuantity(item.id, newQty);
+                }
+              }}
+              containerStyle={styles.box}
+            />
+          </View>
         </View>
-        <Text style={styles.email}>${item.price}</Text>
       </View>
-      <View style={{top:70}}>
-        <AddToCartCounter
-          initialCount={item.quantity || 1}
-          onChange={newQty => updateQuantity(item.id, newQty)}
-        />
-      </View>
-    </View>
-  );
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Your Cart</Text>
+      <Text style={styles.text}>Your Cart</Text>
       <FlatList
         data={cartItems}
         keyExtractor={item => item.id.toString()}
