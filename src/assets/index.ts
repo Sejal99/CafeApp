@@ -10,4 +10,9 @@ export const Images = {
   home: require('./home.png'),
   user: require('./user.png'),
   emptyCart: require('./shopping.png'),
+  leftIcon: require('./left.png'),
+  coffeeBeans: require('./coffee-beans.png'),
+  delivery: require('./delivery.png'),
+  coffeeCup: require('./iced-coffee.png'),
+  redHeart: require('./redheart.png'),
 };

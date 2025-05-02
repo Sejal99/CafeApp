@@ -13,12 +13,13 @@ import {styles} from './styles';
 import {Images} from '../../assets';
 import {useCartStore} from '../../store/cartStore';
 import AddToCartCounter from '../../components/AddToCartCounter';
+import {useNavigation} from '@react-navigation/native';
 
 const Menu = () => {
   const {fetchMenu, items, isLoading} = useFetchMenu();
   const [itemsInCart, setItemsInCart] = useState(0);
   const {addToCart, cartItems, updateQuantity} = useCartStore();
-
+  const navigation = useNavigation();
   useEffect(() => {
     fetchMenu();
   }, []);
@@ -27,14 +28,22 @@ const Menu = () => {
     setItemsInCart(prev => prev + 1);
     addToCart({...item, source: 'menu'});
   };
-  console.log('isLoading', isLoading);
+  console.log('isLoading', items);
+
+  const handleNavigate = item => {
+    navigation.navigate('Details', {item});
+  };
 
   const renderItem = ({item}: {item: any}) => {
-    const cartItem = cartItems.find(i => i.id === item.id && i.source === 'menu');
+    const cartItem = cartItems.find(
+      i => i.id === item.id && i.source === 'menu',
+    );
     const quantity = cartItem?.quantity || 0;
 
     return (
-      <View style={styles.item}>
+      <TouchableOpacity
+        style={styles.item}
+        onPress={() => handleNavigate(item)}>
         <Image source={{uri: item.image}} style={styles.image} />
         <Text style={styles.name}>{item.title}</Text>
         <View style={styles.priceRow}>
@@ -53,7 +62,7 @@ const Menu = () => {
             </TouchableOpacity>
           )}
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
@@ -74,6 +83,7 @@ const Menu = () => {
             keyExtractor={item => item.id.toString()}
             renderItem={renderItem}
             numColumns={2}
+            showsVerticalScrollIndicator={false}
           />
         </>
       )}

@@ -15,10 +15,11 @@ function BottomStack() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#F5DEB3',
-        tabBarLabelStyle: {fontSize: 12},
+        tabBarActiveTintColor: 'white',
+        tabBarInactiveTintColor: 'white',
+        tabBarLabelStyle: {fontSize: 14},
         tabBarStyle: {
-          backgroundColor: '#451800',
+          backgroundColor: '#6E260E',
         },
       }}>
       <Tab.Screen
