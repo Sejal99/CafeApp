@@ -40,7 +40,7 @@ const Header = () => {
           placeholderTextColor="#999"
         />
 
-        <Image source={Images.filterIcon} style={styles.filterIcon} />
+        {/* <Image source={Images.filterIcon} style={styles.filterIcon} /> */}
       </View>
     </SafeAreaView>
   );
@@ -85,8 +85,8 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   iconImage: {
-    width: 22,
-    height: 24,
+    width: 30,
+    height: 30,
     marginLeft: 10,
     tintColor: 'white',
   },

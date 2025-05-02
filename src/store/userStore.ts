@@ -24,6 +24,7 @@ export const useFetchMenu = create(set => ({
   isLoading: false,
   error: null,
   fetchMenu: async () => {
+    set({isLoading: true, error: null});
     try {
       const response = await axios.get(
         'https://api.sampleapis.com/coffee/iced',

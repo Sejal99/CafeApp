@@ -1,11 +1,12 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import UserListScreen from '../../screens/Users';
+
 import AddToCart from '../../screens/cart';
 import Menu from '../../screens/menu';
 import Favorite from '../../screens/favorite';
 import {Image} from 'react-native';
 import {Images} from '../../assets';
+import UserListScreen from '../../screens/home';
 
 const Tab = createBottomTabNavigator();
 
@@ -14,8 +15,11 @@ function BottomStack() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#c67c4e',
+        tabBarActiveTintColor: '#F5DEB3',
         tabBarLabelStyle: {fontSize: 12},
+        tabBarStyle: {
+          backgroundColor: '#451800',
+        },
       }}>
       <Tab.Screen
         name="Home"
@@ -28,7 +32,7 @@ function BottomStack() {
               style={{
                 width: 25,
                 height: 25,
-                tintColor: focused ? '#c67c4e' : undefined,
+                tintColor: focused ? '#F5DEB3' : '#ffffff',
               }}
             />
           ),
@@ -45,7 +49,7 @@ function BottomStack() {
               style={{
                 width: 25,
                 height: 25,
-                tintColor: focused ? '#c67c4e' : undefined,
+                tintColor: focused ? '#F5DEB3' : '#ffffff',
               }}
             />
           ),
@@ -62,7 +66,7 @@ function BottomStack() {
               style={{
                 width: 25,
                 height: 25,
-                tintColor: focused ? '#c67c4e' : undefined,
+                tintColor: focused ? '#F5DEB3' : '#ffffff',
               }}
             />
           ),
@@ -79,7 +83,7 @@ function BottomStack() {
               style={{
                 width: 25,
                 height: 25,
-                tintColor: focused ? '#c67c4e' : undefined,
+                tintColor: focused ? '#F5DEB3' : '#ffffff',
               }}
             />
           ),

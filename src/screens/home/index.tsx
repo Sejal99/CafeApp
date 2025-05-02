@@ -9,12 +9,14 @@ import {
   PermissionsAndroid,
   Platform,
 } from 'react-native';
-import {useUserStore} from '../store/userStore';
-import Header from '../components/Header';
+
 import Geolocation from 'react-native-geolocation-service';
-import {Images} from '../assets';
-import {useCartStore} from '../store/cartStore';
-import AddToCartCounter from '../components/AddToCartCounter';
+import {useUserStore} from '../../store/userStore';
+import {useCartStore} from '../../store/cartStore';
+import AddToCartCounter from '../../components/AddToCartCounter';
+
+import {Images} from '../../assets';
+import Header from '../../components/Header';
 
 const UserListScreen = () => {
   const {users, fetchUsers} = useUserStore();
@@ -66,7 +68,7 @@ const UserListScreen = () => {
     console.log('item', item);
 
     setItemsInCart(prev => prev + 1);
-    addToCart(item);
+    addToCart({...item, source: 'home'});
   };
 
   useEffect(() => {
@@ -74,7 +76,9 @@ const UserListScreen = () => {
   }, [itemsInCart]);
 
   const renderItem = ({item}: {item: any}) => {
-    const cartItem = cartItems.find(cartItem => cartItem.id === item.id);
+    const cartItem = cartItems.find(
+      i => i.id === item.id && i.source === 'home',
+    );
     const quantity = cartItem?.quantity || 0;
 
     return (
@@ -86,7 +90,7 @@ const UserListScreen = () => {
           {quantity > 0 ? (
             <AddToCartCounter
               initialCount={quantity}
-              onChange={newQty => updateQuantity(item.id, newQty)}
+              onChange={newQty => updateQuantity(item.id, newQty, 'home')}
               containerStyle={styles.h2}
             />
           ) : (

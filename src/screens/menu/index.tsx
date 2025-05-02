@@ -5,6 +5,7 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {useFetchMenu} from '../../store/userStore';
@@ -14,23 +15,24 @@ import {useCartStore} from '../../store/cartStore';
 import AddToCartCounter from '../../components/AddToCartCounter';
 
 const Menu = () => {
-  const {fetchMenu, items} = useFetchMenu();
+  const {fetchMenu, items, isLoading} = useFetchMenu();
   const [itemsInCart, setItemsInCart] = useState(0);
   const {addToCart, cartItems, updateQuantity} = useCartStore();
 
   useEffect(() => {
     fetchMenu();
-    console.log('sejal', items);
   }, []);
-  const handleAdd = (item: any) => {
-    console.log('item', item);
 
+  const handleAdd = (item: any) => {
     setItemsInCart(prev => prev + 1);
-    addToCart(item);
+    addToCart({...item, source: 'menu'});
   };
+  console.log('isLoading', isLoading);
+
   const renderItem = ({item}: {item: any}) => {
-    const cartItem = cartItems.find(cartItem => cartItem.id === item.id);
+    const cartItem = cartItems.find(i => i.id === item.id && i.source === 'menu');
     const quantity = cartItem?.quantity || 0;
+
     return (
       <View style={styles.item}>
         <Image source={{uri: item.image}} style={styles.image} />
@@ -40,7 +42,7 @@ const Menu = () => {
           {quantity > 0 ? (
             <AddToCartCounter
               initialCount={quantity}
-              onChange={newQty => updateQuantity(item.id, newQty)}
+              onChange={newQty => updateQuantity(item.id, newQty, 'menu')}
               containerStyle={styles.h1}
             />
           ) : (
@@ -54,18 +56,27 @@ const Menu = () => {
       </View>
     );
   };
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.heading}>
-        <Image source={Images.coffeeIcon} tintColor={'#800020'} />
-        <Text style={styles.text}>Coffee Menu</Text>
-      </View>
-      <FlatList
-        data={items}
-        keyExtractor={item => item.id.toString()}
-        renderItem={renderItem}
-        numColumns={2}
-      />
+      {isLoading ? (
+        <View style={styles.loaderContainer}>
+          <ActivityIndicator size="large" color="#800020" />
+        </View>
+      ) : (
+        <>
+          <View style={styles.heading}>
+            <Image source={Images.coffeeIcon} tintColor={'#800020'} />
+            <Text style={styles.text}>Coffee Menu</Text>
+          </View>
+          <FlatList
+            data={items}
+            keyExtractor={item => item.id.toString()}
+            renderItem={renderItem}
+            numColumns={2}
+          />
+        </>
+      )}
     </SafeAreaView>
   );
 };

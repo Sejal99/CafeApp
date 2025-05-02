@@ -65,6 +65,11 @@ export const styles = StyleSheet.create({
   },
   h1: {
     alignSelf: 'flex-end',
-    left:20
+    left: 20,
+  },
+  loaderContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

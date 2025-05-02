@@ -6,24 +6,30 @@ type CartItem = {
   price: number;
   image: string;
   quantity: number;
+  source: 'menu' | 'home';
 };
 
 type CartState = {
   cartItems: CartItem[];
   addToCart: (item: Omit<CartItem, 'quantity'>) => void;
-  removeFromCart: (id: number) => void;
+  removeFromCart: (id: number, source: CartItem['source']) => void;
   clearCart: () => void;
+  updateQuantity: (id: number, quantity: number, source: CartItem['source']) => void;
 };
 
 export const useCartStore = create<CartState>(set => ({
   cartItems: [],
   addToCart: item =>
     set(state => {
-      const existingItem = state.cartItems.find(i => i.id === item.id);
+      const existingItem = state.cartItems.find(
+        i => i.id === item.id && i.source === item.source,
+      );
       if (existingItem) {
         return {
           cartItems: state.cartItems.map(i =>
-            i.id === item.id ? {...i, quantity: i.quantity + 1} : i,
+            i.id === item.id && i.source === item.source
+              ? {...i, quantity: i.quantity + 1}
+              : i,
           ),
         };
       }
@@ -31,15 +37,22 @@ export const useCartStore = create<CartState>(set => ({
         cartItems: [...state.cartItems, {...item, quantity: 1}],
       };
     }),
-  removeFromCart: id =>
+
+  removeFromCart: (id, source) =>
     set(state => ({
-      cartItems: state.cartItems.filter(item => item.id !== id),
+      cartItems: state.cartItems.filter(
+        item => !(item.id === id && item.source === source),
+      ),
     })),
+
   clearCart: () => set({cartItems: []}),
-  updateQuantity: (id: number, quantity: any) =>
+
+  updateQuantity: (id, quantity, source) =>
     set(state => ({
       cartItems: state.cartItems.map(item =>
-        item.id === id ? {...item, quantity} : item,
+        item.id === id && item.source === source
+          ? {...item, quantity}
+          : item,
       ),
     })),
 }));
