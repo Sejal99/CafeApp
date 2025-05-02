@@ -70,7 +70,7 @@ const AddToCart = () => {
         />
       )}
       {cartItems.length > 0 && (
-        <>
+        <View style={styles.checkoutBox}>
           <View style={styles.totalBox}>
             <Text style={styles.text}>Total Amount</Text>
             <Text style={styles.totalAmount}>${totalAmount.toFixed(2)}</Text>
@@ -78,7 +78,7 @@ const AddToCart = () => {
           <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>Click To Pay</Text>
           </TouchableOpacity>
-        </>
+        </View>
       )}
     </SafeAreaView>
   );

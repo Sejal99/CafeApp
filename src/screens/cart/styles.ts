@@ -67,7 +67,7 @@ export const styles = StyleSheet.create({
     padding: 16,
     backgroundColor: '#c67c4e',
     borderRadius: 4,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
   },
@@ -84,10 +84,16 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
     borderRadius: 12,
-    top: 20,
+    marginHorizontal: 10,
   },
   buttonText: {
     color: 'white',
     fontSize: 14,
+  },
+  checkoutBox: {
+    flexDirection: 'row',
+    backgroundColor: '#c67c4e',
+    justifyContent: 'space-between',
+    top: 35,
   },
 });

@@ -10,6 +10,7 @@ import React, {useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {styles} from './styles';
 import {Images} from '../../assets';
+import {useFavoritesStore} from '../../store/useFavoritesStore';
 
 const Details = () => {
   const route = useRoute();
@@ -17,12 +18,14 @@ const Details = () => {
   const navigation = useNavigation();
   const [isToggle, setIsToggle] = useState(false);
   console.log('item', item);
-
+  const toggleFavorite = useFavoritesStore(state => state.toggleFavorite);
+  const isFavorite = useFavoritesStore(state => state.isFavorite(item.id));
   const handleGoBack = () => {
     navigation.goBack();
   };
   const handleToggle = () => {
-    setIsToggle(!isToggle);
+    // setIsToggle(!isToggle);
+    toggleFavorite(item);
   };
   return (
     <SafeAreaView style={styles.container}>
@@ -34,7 +37,7 @@ const Details = () => {
         <Text style={styles.text}>Details</Text>
         <TouchableOpacity onPress={handleToggle}>
           <Image
-            source={isToggle ? Images.redHeart : Images.heart}
+            source={isFavorite ? Images.redHeart : Images.heart}
             style={styles.image}
           />
         </TouchableOpacity>
