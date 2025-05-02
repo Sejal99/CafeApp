@@ -53,17 +53,41 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginHorizontal: 10,
   },
-box: {
-    // flexDirection: 'row',
-    // alignItems: 'center',
-    // borderRadius: 8,
-    // borderWidth: 2,
-    // borderColor: '#c67c4e',
-    // paddingHorizontal: 5,
-    // paddingVertical: 5,
-    // width: 120,
-    // alignSelf: 'flex-start',
-    // justifyCo;ntent: 'center',
-marginHorizontal:60
+  box: {
+    marginHorizontal: 60,
+  },
+  emptyCartImage: {
+    height: 200,
+    width: 200,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  totalBox: {
+    padding: 16,
+    backgroundColor: '#c67c4e',
+    borderRadius: 4,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  totalAmount: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  button: {
+    backgroundColor: '#9A2A2A',
+    padding: 20,
+    width: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
+    borderRadius: 12,
+    top: 20,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 14,
   },
 });

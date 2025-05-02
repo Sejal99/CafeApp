@@ -15,6 +15,7 @@ type CartState = {
   removeFromCart: (id: number, source: CartItem['source']) => void;
   clearCart: () => void;
   updateQuantity: (id: number, quantity: number, source: CartItem['source']) => void;
+  
 };
 
 export const useCartStore = create<CartState>(set => ({

@@ -11,7 +11,13 @@ import {
 import {Images} from '../assets';
 import {useNavigation} from '@react-navigation/native';
 
-const Header = () => {
+const Header = ({
+  searchText,
+  onChangeSearch,
+}: {
+  searchText: string;
+  onChangeSearch: (text: string) => void;
+}) => {
   const navigation = useNavigation();
   const handleGoToCart = () => {
     navigation.navigate('AddToCart');
@@ -38,6 +44,8 @@ const Header = () => {
           placeholder="Search"
           style={styles.searchInput}
           placeholderTextColor="#999"
+          value={searchText}
+          onChangeText={onChangeSearch}
         />
 
         {/* <Image source={Images.filterIcon} style={styles.filterIcon} /> */}

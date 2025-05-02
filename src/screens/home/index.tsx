@@ -17,17 +17,23 @@ import AddToCartCounter from '../../components/AddToCartCounter';
 
 import {Images} from '../../assets';
 import Header from '../../components/Header';
+import {useNavigation} from '@react-navigation/native';
 
 const UserListScreen = () => {
   const {users, fetchUsers} = useUserStore();
   const [itemsInCart, setItemsInCart] = useState(0);
   const [hasLocationPermission, setHasLocationPermission] = useState(false);
   const {addToCart, cartItems, updateQuantity} = useCartStore();
-
+  const [searchText, setSearchText] = useState('');
+  const navigation = useNavigation();
   useEffect(() => {
     fetchUsers();
     console.log('ssss', users);
   }, []);
+
+  const filteredItems = users.filter(item =>
+    item.title.toLowerCase().includes(searchText.toLowerCase()),
+  );
 
   const requestLocationPermission = async () => {
     if (Platform.OS === 'android') {
@@ -65,10 +71,18 @@ const UserListScreen = () => {
   }, [hasLocationPermission]);
 
   const handleAdd = (item: any) => {
-    console.log('item', item);
-
-    setItemsInCart(prev => prev + 1);
-    addToCart({...item, source: 'home'});
+    const existingItem = cartItems.find(
+      i => i.id === item.id && i.source === 'home',
+    );
+    if (existingItem) {
+      updateQuantity(item.id, existingItem.quantity + 1, 'home');
+    } else {
+      setItemsInCart(prev => prev + 1);
+      addToCart({...item, source: 'home'});
+    }
+  };
+  const handleNavigate = item => {
+    navigation.navigate('Details', {item});
   };
 
   useEffect(() => {
@@ -82,7 +96,9 @@ const UserListScreen = () => {
     const quantity = cartItem?.quantity || 0;
 
     return (
-      <View style={styles.item}>
+      <TouchableOpacity
+        style={styles.item}
+        onPress={() => handleNavigate(item)}>
         <Image source={{uri: item.image}} style={styles.image} />
         <Text style={styles.name}>{item.title}</Text>
         <View style={styles.priceRow}>
@@ -101,13 +117,13 @@ const UserListScreen = () => {
             </TouchableOpacity>
           )}
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 
   return (
     <View style={styles.container}>
-      <Header />
+      <Header searchText={searchText} onChangeSearch={setSearchText} />
 
       <View style={styles.overlayBox}>
         <View style={styles.textContainer}>
@@ -121,7 +137,7 @@ const UserListScreen = () => {
       </View>
 
       <FlatList
-        data={users}
+        data={searchText ? filteredItems : users}
         keyExtractor={item => item.id.toString()}
         renderItem={renderItem}
         contentContainerStyle={styles.list}
@@ -149,7 +165,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flex: 1,
     marginHorizontal: 10,
-    // height: 200,
     marginVertical: 20,
   },
   name: {

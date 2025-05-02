@@ -9,4 +9,5 @@ export const Images = {
   coffeeIcon: require('./coffeeIcon.png'),
   home: require('./home.png'),
   user: require('./user.png'),
+  emptyCart: require('./shopping.png'),
 };
