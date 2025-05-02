@@ -24,7 +24,6 @@ const Details = () => {
     navigation.goBack();
   };
   const handleToggle = () => {
-    // setIsToggle(!isToggle);
     toggleFavorite(item);
   };
   return (
