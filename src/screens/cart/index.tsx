@@ -7,6 +7,8 @@ import {Images} from '../../assets';
 import AddToCartCounter from '../../components/AddToCartCounter';
 import {useFetchMenu} from '../../store/userStore';
 import EmptyCartAnimation from '../../components/EmptyCartAnimation';
+import RazorpayCheckout from 'react-native-razorpay';
+// import {RAZORPAY_KEY} from './constants';
 
 const AddToCart = () => {
   const {cartItems, removeFromCart, clearCart, updateQuantity} = useCartStore();
@@ -56,6 +58,39 @@ const AddToCart = () => {
       </View>
     );
   };
+  const imgURL =
+    'https://m.media-amazon.com/images/I/61L5QgPvgqL._AC_UF1000,1000_QL80_.jpg';
+
+  const onPressBuy = () => {
+    //Order Api: Call POST api with body like (username, id, price etc) to create an Order and use order_id in below options object
+    // const response = await .....
+
+    let options = {
+      description: 'Credits towards consultation',
+      image: imgURL, //require('../../images.png')
+      currency: 'INR', //In USD - only card option will exist rest(like wallet, UPI, EMI etc) will hide
+      key: 'rzp_test_J7ZwyhRYL6l1T5',
+      amount: '5000',
+      name: 'Acme Corp',
+      order_id: '', //Replace this with an order_id(response.data.orderId) created using Orders API.
+      prefill: {
+        email: 'hasan@example.com',
+        contact: '9191919191',
+        name: 'Hasan',
+      }, //if prefill is not provided then on razorpay screen it has to be manually entered.
+      theme: {color: '#53a20e'},
+    };
+    RazorpayCheckout.open(options)
+      .then(data => {
+        // handle success
+        alert(`Success: ${data.razorpay_payment_id}`);
+        clearCart();
+      })
+      .catch(error => {
+        // handle failure
+        alert(`Error: ${error.code} | ${error.description}`);
+      });
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -75,7 +110,7 @@ const AddToCart = () => {
             <Text style={styles.text}>Total Amount</Text>
             <Text style={styles.totalAmount}>${totalAmount.toFixed(2)}</Text>
           </View>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={onPressBuy}>
             <Text style={styles.buttonText}>Click To Pay</Text>
           </TouchableOpacity>
         </View>
