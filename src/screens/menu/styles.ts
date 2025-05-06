@@ -72,4 +72,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  button:{
+    backgroundColor:'#F2D2BD'
+  }
 });

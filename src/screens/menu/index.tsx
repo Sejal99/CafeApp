@@ -53,6 +53,8 @@ const Menu = () => {
               initialCount={quantity}
               onChange={newQty => updateQuantity(item.id, newQty, 'menu')}
               containerStyle={styles.h1}
+              buttonStyle={styles.button}
+
             />
           ) : (
             <TouchableOpacity

@@ -7,6 +7,7 @@ export const useUserStore = create(set => ({
   error: null,
 
   fetchUsers: async () => {
+    set({isLoading: true, error: null});
     try {
       const response = await axios.get(
         'https://coffee-shop-api-sandy.vercel.app/api/v1/products',

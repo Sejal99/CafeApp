@@ -10,9 +10,9 @@ import EmptyCartAnimation from '../../components/EmptyCartAnimation';
 
 const AddToCart = () => {
   const {cartItems, removeFromCart, clearCart, updateQuantity} = useCartStore();
-  const totalAmount = cartItems.reduce((total, item) => {
-    return total + item.price * (item.quantity || 1);
-  }, 0);
+  const totalAmount = cartItems
+    .filter(item => item.quantity > 0)
+    .reduce((total, item) => total + item.price * item.quantity, 0);
 
   const renderItem = ({item}: {item: any}) => {
     const cartItem = cartItems.find(cartItem => cartItem.id === item.id);
@@ -64,7 +64,7 @@ const AddToCart = () => {
         <EmptyCartAnimation />
       ) : (
         <FlatList
-          data={cartItems}
+          data={cartItems.filter(item => item.quantity > 0)}
           keyExtractor={item => item.id.toString()}
           renderItem={renderItem}
         />

@@ -1,5 +1,5 @@
 import React, {useRef, useEffect} from 'react';
-import {Animated, StyleSheet, Text, View} from 'react-native';
+import {Animated, Easing, StyleSheet, Text, View} from 'react-native';
 import {Images} from '../assets';
 
 const EmptyCartAnimation = () => {
@@ -10,15 +10,23 @@ const EmptyCartAnimation = () => {
       Animated.sequence([
         Animated.timing(moveAnim, {
           toValue: 10,
-          duration: 500,
+          duration: 400,
+          easing: Easing.inOut(Easing.ease),
           useNativeDriver: true,
         }),
         Animated.timing(moveAnim, {
           toValue: -10,
-          duration: 500,
+          duration: 800,
+          easing: Easing.inOut(Easing.ease),
           useNativeDriver: true,
         }),
-      ]),
+        Animated.timing(moveAnim, {
+          toValue: 0,
+          duration: 400,
+          easing: Easing.inOut(Easing.ease),
+          useNativeDriver: true,
+        }),
+      ])
     ).start();
   }, [moveAnim]);
 
