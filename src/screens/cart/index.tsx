@@ -69,7 +69,7 @@ const AddToCart = () => {
       description: 'Credits towards consultation',
       image: imgURL, //require('../../images.png')
       currency: 'INR', //In USD - only card option will exist rest(like wallet, UPI, EMI etc) will hide
-      key: 'rzp_test_J7ZwyhRYL6l1T5',
+      key: '',
       amount: '5000',
       name: 'Acme Corp',
       order_id: '', //Replace this with an order_id(response.data.orderId) created using Orders API.
