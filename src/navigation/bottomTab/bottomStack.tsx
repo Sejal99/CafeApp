@@ -15,7 +15,7 @@ function BottomStack() {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: 'white',
+        tabBarActiveTintColor: '#f7dc6f',
         tabBarInactiveTintColor: 'white',
         tabBarLabelStyle: {fontSize: 14},
         tabBarStyle: {
@@ -33,7 +33,7 @@ function BottomStack() {
               style={{
                 width: 25,
                 height: 25,
-                tintColor: focused ? '#F5DEB3' : '#ffffff',
+                tintColor: focused ? '#f7dc6f' : '#ffffff',
               }}
             />
           ),
@@ -50,7 +50,7 @@ function BottomStack() {
               style={{
                 width: 25,
                 height: 25,
-                tintColor: focused ? '#F5DEB3' : '#ffffff',
+                tintColor: focused ? '#f7dc6f' : '#ffffff',
               }}
             />
           ),
@@ -67,7 +67,7 @@ function BottomStack() {
               style={{
                 width: 25,
                 height: 25,
-                tintColor: focused ? '#F5DEB3' : '#ffffff',
+                tintColor: focused ? '#f7dc6f' : '#ffffff',
               }}
             />
           ),
@@ -84,7 +84,7 @@ function BottomStack() {
               style={{
                 width: 25,
                 height: 25,
-                tintColor: focused ? '#F5DEB3' : '#ffffff',
+                tintColor: focused ? '#f7dc6f' : '#ffffff',
               }}
             />
           ),

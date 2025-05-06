@@ -5,7 +5,6 @@ import {styles} from './styles';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Images} from '../../assets';
 import AddToCartCounter from '../../components/AddToCartCounter';
-import {useFetchMenu} from '../../store/userStore';
 import EmptyCartAnimation from '../../components/EmptyCartAnimation';
 import RazorpayCheckout from 'react-native-razorpay';
 // import {RAZORPAY_KEY} from './constants';

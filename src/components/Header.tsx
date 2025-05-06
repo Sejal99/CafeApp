@@ -14,23 +14,31 @@ import {useNavigation} from '@react-navigation/native';
 const Header = ({
   searchText,
   onChangeSearch,
+  onLocationPress,
+  locationName,
 }: {
   searchText: string;
   onChangeSearch: (text: string) => void;
+  onLocationPress: () => void;
+  locationName: string;
 }) => {
   const navigation = useNavigation();
+
   const handleGoToCart = () => {
     navigation.navigate('AddToCart');
   };
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <View style={styles.headerContent}>
           <View style={styles.headerText}>
-            <View style={styles.text}>
+            <TouchableOpacity onPress={onLocationPress}>
               <Text style={styles.location}>Location</Text>
-              <Text style={styles.name}>......</Text>
-            </View>
+              <Text style={styles.name}>
+                {locationName || 'Select Location'}
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -38,6 +46,7 @@ const Header = ({
           <Image source={Images.user} style={styles.iconImage} />
         </TouchableOpacity>
       </View>
+
       <View style={styles.searchContainer}>
         <Image source={Images.searchIcon} style={styles.searchIcon} />
         <TextInput
@@ -47,8 +56,6 @@ const Header = ({
           value={searchText}
           onChangeText={onChangeSearch}
         />
-
-        {/* <Image source={Images.filterIcon} style={styles.filterIcon} /> */}
       </View>
     </SafeAreaView>
   );
@@ -58,6 +65,12 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#451800',
   },
+  map: {
+    height: 300,
+    width: '100%',
+    marginTop: 10,
+  },
+
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -119,11 +132,6 @@ const styles = StyleSheet.create({
     height: 40,
     fontSize: 16,
     color: '#000',
-  },
-  filterIcon: {
-    width: 20,
-    height: 20,
-    marginLeft: 8,
   },
 });
 

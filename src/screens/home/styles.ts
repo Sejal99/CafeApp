@@ -9,6 +9,18 @@ export const styles = StyleSheet.create({
     padding: 20,
     marginVertical: 30,
   },
+  closeButton: {
+    position: 'absolute',
+    top: 40,
+    right: 20,
+    backgroundColor: '#800020',
+    padding: 10,
+    borderRadius: 20,
+  },
+  closeText: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
   item: {
     marginBottom: 20,
     backgroundColor: '#edd6cb',
