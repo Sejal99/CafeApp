@@ -8,7 +8,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 10,
     marginVertical: 16,
-    height: 250,
   },
 
   name: {
@@ -17,6 +16,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     top: 10,
     color: 'white',
+    height:40
   },
   email: {
     fontSize: 14,
@@ -72,7 +72,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  button:{
-    backgroundColor:'#F2D2BD'
-  }
+  button: {
+    backgroundColor: '#F2D2BD',
+  },
 });

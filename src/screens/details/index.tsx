@@ -47,7 +47,7 @@ const Details = () => {
 
           <View style={styles.titleContainer}>
             <View>
-              <Text style={styles.title}>{item.title}</Text>
+              <Text style={styles.title}>{item.title ?? item.name}</Text>
               {item?.category?.hot && (
                 <Text style={styles.categoryText}>Hot</Text>
               )}
@@ -64,12 +64,14 @@ const Details = () => {
           <View style={styles.line} />
           <View>
             <Text style={styles.title}>Description</Text>
-            <Text style={styles.descText}>{item.description}</Text>
+            <Text style={styles.descText}>
+              {item.description ?? item.ingredients}
+            </Text>
           </View>
         </View>
         <View style={styles.footer}>
           <Text style={styles.price1}>Price</Text>
-          <Text style={styles.price}>${item.price}</Text>
+          <Text style={styles.price}>${item.price ?? 50}</Text>
 
           <TouchableOpacity style={styles.bottomContainer}>
             <Text style={styles.buttonText}>Buy Now</Text>

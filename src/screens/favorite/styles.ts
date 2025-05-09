@@ -48,4 +48,9 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#800020',
   },
+  favContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 200,
+  },
 });

@@ -8,7 +8,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {useFetchMenu} from '../../store/userStore';
+import {useFetchMenu, useMenu} from '../../store/userStore';
 import {styles} from './styles';
 import {Images} from '../../assets';
 import {useCartStore} from '../../store/cartStore';
@@ -17,11 +17,13 @@ import {useNavigation} from '@react-navigation/native';
 
 const Menu = () => {
   const {fetchMenu, items, isLoading} = useFetchMenu();
+  const {fetchMenuItems, menuItems} = useMenu();
   const [itemsInCart, setItemsInCart] = useState(0);
   const {addToCart, cartItems, updateQuantity} = useCartStore();
   const navigation = useNavigation();
   useEffect(() => {
     fetchMenu();
+    fetchMenuItems();
   }, []);
 
   const handleAdd = (item: any) => {
@@ -45,16 +47,15 @@ const Menu = () => {
         style={styles.item}
         onPress={() => handleNavigate(item)}>
         <Image source={{uri: item.image}} style={styles.image} />
-        <Text style={styles.name}>{item.title}</Text>
+        <Text style={styles.name}>{item.title ?? item.name}</Text>
         <View style={styles.priceRow}>
-          <Text style={styles.email}>${item.price}</Text>
+          <Text style={styles.email}>${item.price ?? 50}</Text>
           {quantity > 0 ? (
             <AddToCartCounter
               initialCount={quantity}
               onChange={newQty => updateQuantity(item.id, newQty, 'menu')}
               containerStyle={styles.h1}
               buttonStyle={styles.button}
-
             />
           ) : (
             <TouchableOpacity
@@ -67,6 +68,7 @@ const Menu = () => {
       </TouchableOpacity>
     );
   };
+  console.log('fetchMenuItems', menuItems);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -81,7 +83,7 @@ const Menu = () => {
             <Text style={styles.text}>Coffee Menu</Text>
           </View>
           <FlatList
-            data={items}
+            data={[...items, ...menuItems]}
             keyExtractor={item => item.id.toString()}
             renderItem={renderItem}
             numColumns={2}

@@ -1,13 +1,20 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, ViewStyle, TextStyle} from 'react-native';
 
-const AddToCartCounter = ({
+interface AddToCartCounterProps {
+  initialCount?: number;
+  onChange?: (newCount: number) => void;
+  containerStyle?: ViewStyle;
+  buttonStyle?: ViewStyle;
+}
+
+const AddToCartCounter: React.FC<AddToCartCounterProps> = ({
   initialCount = 0,
   onChange,
   containerStyle,
   buttonStyle,
 }) => {
-  const [count, setCount] = useState(initialCount);
+  const [count, setCount] = useState<number>(initialCount);
 
   const increment = () => {
     const newCount = count + 1;

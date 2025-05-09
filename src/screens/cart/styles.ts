@@ -53,9 +53,26 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginHorizontal: 10,
   },
+  ratingRow: {
+    flexDirection: 'row',
+    marginHorizontal: 10,
+    alignItems: 'center',
+  },
+  starImage: {
+    height: 20,
+    width: 20,
+  },
+  priceRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   box: {
+    width: 120,
+    // marginTop: 10,
     marginHorizontal: 60,
   },
+
   emptyCartImage: {
     height: 200,
     width: 200,

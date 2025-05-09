@@ -40,6 +40,24 @@ export const useFetchMenu = create(set => ({
   },
 }));
 
+export const useMenu = create(set => ({
+  menuItems: [],
+  isLoading: false,
+  error: null,
+  fetchMenuItems: async () => {
+    set({isLoading: true, erroe: null});
+    try {
+      const response = await axios.get('https://dummyjson.com/recipes');
+      console.log('erererer', response.data.recipes);
+
+      set({menuItems: response.data.recipes, isLoading: false});
+    } catch (error) {
+      console.error('Failed to fetch items:', error);
+      set({error: 'Failed to fetch items', isLoading: false});
+    }
+  },
+}));
+
 // Component Mounts
 //    ↓
 // fetchUsers() call

@@ -3,7 +3,7 @@ import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
 import {useFavoritesStore} from '../../store/useFavoritesStore';
 import {styles} from './styles';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import EmptyCartAnimation from '../../components/EmptyCartAnimation';
+
 import {Images} from '../../assets';
 
 const Favorite = ({navigation}) => {
@@ -13,7 +13,7 @@ const Favorite = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>My Favorites</Text>
       {favorites.length === 0 ? (
-        <View style={{justifyContent: 'center', alignItems: 'center',marginVertical:200}}>
+        <View style={styles.favContainer}>
           <Text style={styles.text}>No Favorites Added Yet!</Text>
           <Image source={Images.noFavIcon} style={{}} />
         </View>
@@ -27,8 +27,8 @@ const Favorite = ({navigation}) => {
               style={styles.card}>
               <Image source={{uri: item.image}} style={styles.image} />
               <View>
-                <Text style={styles.name}>{item.title}</Text>
-                <Text style={styles.price}>${item.price}</Text>
+                <Text style={styles.name}>{item.title ?? item.name}</Text>
+                <Text style={styles.price}>${item.price ?? 50}</Text>
               </View>
             </TouchableOpacity>
           )}
