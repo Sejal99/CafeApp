@@ -1,7 +1,12 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
-const AddToCartCounter = ({initialCount = 0, onChange, containerStyle,buttonStyle}) => {
+const AddToCartCounter = ({
+  initialCount = 0,
+  onChange,
+  containerStyle,
+  buttonStyle,
+}) => {
   const [count, setCount] = useState(initialCount);
 
   const increment = () => {
@@ -18,13 +23,17 @@ const AddToCartCounter = ({initialCount = 0, onChange, containerStyle,buttonStyl
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <TouchableOpacity onPress={decrement} style={[styles.button,buttonStyle]}>
+      <TouchableOpacity
+        onPress={decrement}
+        style={[styles.button, buttonStyle]}>
         <Text style={styles.buttonText}>–</Text>
       </TouchableOpacity>
 
       <Text style={styles.countText}>{count}</Text>
 
-      <TouchableOpacity onPress={increment} style={[styles.button,buttonStyle]}>
+      <TouchableOpacity
+        onPress={increment}
+        style={[styles.button, buttonStyle]}>
         <Text style={styles.buttonText}>+</Text>
       </TouchableOpacity>
     </View>

@@ -15,4 +15,5 @@ export const Images = {
   delivery: require('./delivery.png'),
   coffeeCup: require('./iced-coffee.png'),
   redHeart: require('./redheart.png'),
+  noFavIcon:require('./noFav.png'),
 };

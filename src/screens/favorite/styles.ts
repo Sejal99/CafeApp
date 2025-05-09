@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 18,
     marginHorizontal: 20,
+    color: '#800020',
   },
   image: {
     height: 120,
@@ -40,5 +41,11 @@ export const styles = StyleSheet.create({
     color: 'white',
     marginHorizontal: 10,
     marginVertical: 20,
+  },
+  text: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    color: '#800020',
   },
 });

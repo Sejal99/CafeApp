@@ -68,6 +68,8 @@ const UserListScreen = () => {
 
   useEffect(() => {
     requestLocationPermission();
+    console.log('Got location:', location);
+
   }, []);
 
   useEffect(() => {
@@ -150,6 +152,7 @@ const UserListScreen = () => {
         onLocationPress={() => setShowMap(true)}
         locationName={locationName}
       />
+
       <View style={styles.overlayBox}>
         <View style={styles.textContainer}>
           <Text style={styles.text}>Promo</Text>
@@ -161,23 +164,25 @@ const UserListScreen = () => {
         <Image source={Images.coffee} style={styles.coffeeImage} />
       </View>
 
-      {isLoading ? (
-        <View style={styles.loaderContainer}>
-          <ActivityIndicator size="large" color="#800020" />
-        </View>
-      ) : (
-        <FlatList
-          data={searchText ? filteredItems : users}
-          keyExtractor={item => item.id.toString()}
-          renderItem={renderItem}
-          contentContainerStyle={styles.list}
-          numColumns={2}
-        />
-      )}
-
+      <View style={styles.listContainer}>
+        {isLoading ? (
+          <View style={styles.loaderContainer}>
+            <ActivityIndicator size="large" color="#800020" />
+          </View>
+        ) : (
+          <FlatList
+            data={searchText ? filteredItems : users}
+            keyExtractor={item => item.id.toString()}
+            renderItem={renderItem}
+            contentContainerStyle={styles.list}
+            numColumns={2}
+            showsVerticalScrollIndicator={false}
+          />
+        )}
+      </View>
       {showMap && location && (
         <View
-          style={{position: 'absolute', top: 0, left: 0, right: 0, bottom: 0}}>
+          style={styles.map}>
           <CustomMapView
             latitude={location.latitude}
             longitude={location.longitude}

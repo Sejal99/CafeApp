@@ -17,6 +17,11 @@ export const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 20,
   },
+
+  listContainer: {
+    flex: 1,
+    top: 30,
+  },
   closeText: {
     color: 'white',
     fontWeight: 'bold',
@@ -78,6 +83,7 @@ export const styles = StyleSheet.create({
     borderRadius: 10,
     justifyContent: 'space-between',
     flexDirection: 'row',
+    // zIndex: 1,
   },
   coffeeImage: {
     width: 110,
@@ -116,5 +122,12 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  map: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
 });

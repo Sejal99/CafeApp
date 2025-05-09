@@ -30,6 +30,7 @@ const CustomMapView = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: 400,
   },
 });
 

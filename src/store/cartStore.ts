@@ -14,8 +14,11 @@ type CartState = {
   addToCart: (item: Omit<CartItem, 'quantity'>) => void;
   removeFromCart: (id: number, source: CartItem['source']) => void;
   clearCart: () => void;
-  updateQuantity: (id: number, quantity: number, source: CartItem['source']) => void;
-  
+  updateQuantity: (
+    id: number,
+    quantity: number,
+    source: CartItem['source'],
+  ) => void;
 };
 
 export const useCartStore = create<CartState>(set => ({
@@ -39,11 +42,9 @@ export const useCartStore = create<CartState>(set => ({
       };
     }),
 
-  removeFromCart: (id, source) =>
+  removeFromCart: id =>
     set(state => ({
-      cartItems: state.cartItems.filter(
-        item => !(item.id === id && item.source === source),
-      ),
+      cartItems: state.cartItems.filter(item => item.id !== id),
     })),
 
   clearCart: () => set({cartItems: []}),
@@ -51,9 +52,7 @@ export const useCartStore = create<CartState>(set => ({
   updateQuantity: (id, quantity, source) =>
     set(state => ({
       cartItems: state.cartItems.map(item =>
-        item.id === id && item.source === source
-          ? {...item, quantity}
-          : item,
+        item.id === id && item.source === source ? {...item, quantity} : item,
       ),
     })),
 }));
