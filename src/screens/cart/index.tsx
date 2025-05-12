@@ -56,7 +56,7 @@ const AddToCart = () => {
       currency: 'INR',
       key: '',
       amount: '5000',
-      name: 'Acme Corp',
+      name: 'CafeNest',
       order_id: '',
       prefill: {
         email: 'hasan@example.com',

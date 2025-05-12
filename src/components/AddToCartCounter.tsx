@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, ViewStyle, TextStyle} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, ViewStyle,} from 'react-native';
 
 interface AddToCartCounterProps {
   initialCount?: number;
