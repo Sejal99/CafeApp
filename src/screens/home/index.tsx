@@ -32,7 +32,10 @@ const UserListScreen = () => {
   const [showMap, setShowMap] = useState(false);
   const navigation = useNavigation();
   const [locationName, setLocationName] = useState('');
-
+  const handleMarkerDrag = (coords: {latitude: number; longitude: number}) => {
+    console.log('Dragged to:', coords);
+    setLocation(coords);
+  };
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -69,7 +72,6 @@ const UserListScreen = () => {
   useEffect(() => {
     requestLocationPermission();
     console.log('Got location:', location);
-
   }, []);
 
   useEffect(() => {
@@ -181,12 +183,15 @@ const UserListScreen = () => {
         )}
       </View>
       {showMap && location && (
-        <View
-          style={styles.map}>
+        <View style={styles.map}>
           <CustomMapView
             latitude={location.latitude}
             longitude={location.longitude}
+            markerTitle="You are here"
+            markerDescription="This is your current location"
+            onMarkerDrag={handleMarkerDrag}
           />
+
           <TouchableOpacity style={styles.closeButton} onPress={handleCloseMap}>
             <Text style={styles.closeText}>Close</Text>
           </TouchableOpacity>
