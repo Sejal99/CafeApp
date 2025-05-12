@@ -5,8 +5,6 @@ import MapView, {LatLng, Marker} from 'react-native-maps';
 const CustomMapView = ({
   latitude,
   longitude,
-  markerTitle = 'Selected Location',
-  markerDescription = 'This is your pinned location',
   onMarkerDrag,
 }: {
   latitude: number;
@@ -27,7 +25,7 @@ const CustomMapView = ({
         }}
         showsUserLocation={true}
         followsUserLocation={true}>
-        <Marker
+        <Marker 
           coordinate={{latitude, longitude}}
           title="Selected Location"
           description="This is your pinned location"
