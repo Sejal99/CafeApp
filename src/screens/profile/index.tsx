@@ -15,7 +15,6 @@ const ProfileScreen = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* Header Section */}
         <View style={styles.header}>
           <Image source={{uri: user.avatar}} style={styles.avatar} />
           <Text style={styles.name}>{user.name}</Text>
