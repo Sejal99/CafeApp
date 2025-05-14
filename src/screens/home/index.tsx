@@ -131,6 +131,7 @@ const UserListScreen = () => {
         onPress={() => handleNavigate(item)}>
         <Image source={{uri: item.image}} style={styles.image} />
         <Text style={styles.name}>{item.title}</Text>
+
         <View style={styles.priceRow}>
           <Text style={styles.email}>${item.price}</Text>
           {quantity > 0 ? (

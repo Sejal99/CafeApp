@@ -41,7 +41,7 @@ const Header = ({
   }, []);
 
   const handleGoToCart = () => {
-    navigation.navigate('AddToCart');
+    navigation.navigate('Profile');
   };
 
   return (

@@ -1,4 +1,4 @@
-import {View, Text, FlatList, Image, TouchableOpacity} from 'react-native';
+import {View, Text, FlatList, Image, TouchableOpacity, Alert} from 'react-native';
 import React from 'react';
 import {useCartStore} from '../../store/cartStore';
 import {styles} from './styles';
@@ -8,23 +8,31 @@ import AddToCartCounter from '../../components/AddToCartCounter';
 import EmptyCartAnimation from '../../components/EmptyCartAnimation';
 import RazorpayCheckout from 'react-native-razorpay';
 
+const DEFAULT_IMAGE = 'https://via.placeholder.com/100';
+
 const AddToCart = () => {
   const {cartItems, removeFromCart, clearCart, updateQuantity} = useCartStore();
 
-  const totalAmount = cartItems
-    .filter(item => item.quantity > 0)
-    .reduce((total, item) => total + (item.price ?? 50) * item.quantity, 0);
+  const validCartItems = cartItems.filter(item => item?.quantity > 0 && item?.id != null);
+
+  const totalAmount = validCartItems.reduce((total, item) => {
+    const itemPrice = typeof item.price === 'number' ? item.price : 50;
+    const itemQty = typeof item.quantity === 'number' ? item.quantity : 0;
+    return total + itemPrice * itemQty;
+  }, 0);
 
   const renderItem = ({item}: {item: any}) => {
+    const imageSource = item.image ? {uri: item.image} : {uri: DEFAULT_IMAGE};
+
     return (
       <View style={styles.item}>
-        <Image source={{uri: item.image}} style={styles.image} />
+        <Image source={imageSource} style={styles.image} resizeMode="contain" />
         <View style={styles.textView}>
-          <Text style={styles.name}>{item.title ?? item.name}</Text>
+          <Text style={styles.name}>{item.title || item.name || 'Unnamed Item'}</Text>
 
           <View style={styles.ratingRow}>
             <Image source={Images.star} style={styles.starImage} />
-            <Text style={styles.rating}>{item?.rating?.rate ?? 4.5}</Text>
+            <Text style={styles.rating}>{item?.rating?.rate ?? '4.5'}</Text>
           </View>
 
           <View style={styles.priceRow}>
@@ -32,10 +40,11 @@ const AddToCart = () => {
             <AddToCartCounter
               initialCount={item.quantity}
               onChange={newQty => {
+                if (!item.id) return;
                 if (newQty === 0) {
-                  removeFromCart(item.id);
+                  removeFromCart(item.id, item.source); 
                 } else {
-                  updateQuantity(item.id, newQty);
+                  updateQuantity(item.id, newQty, item.source);
                 }
               }}
               containerStyle={styles.box}
@@ -46,16 +55,23 @@ const AddToCart = () => {
     );
   };
 
-  const imgURL =
-    'https://m.media-amazon.com/images/I/61L5QgPvgqL._AC_UF1000,1000_QL80_.jpg';
-
   const onPressBuy = () => {
-    let options = {
+    if (!totalAmount || totalAmount <= 0) {
+      Alert.alert('Cart Error', 'Total amount must be greater than 0 to proceed.');
+      return;
+    }
+
+    if (validCartItems.length === 0) {
+      Alert.alert('Cart Error', 'No valid items to purchase.');
+      return;
+    }
+
+    const options = {
       description: 'Credits towards consultation',
-      image: imgURL,
+      image: 'https://m.media-amazon.com/images/I/61L5QgPvgqL._AC_UF1000,1000_QL80_.jpg',
       currency: 'INR',
-      key: '',
-      amount: '5000',
+      key: '', // <- Make sure to set your Razorpay Key here
+      amount: (totalAmount * 100).toFixed(0), // in paise
       name: 'CafeNest',
       order_id: '',
       prefill: {
@@ -65,29 +81,35 @@ const AddToCart = () => {
       },
       theme: {color: '#53a20e'},
     };
+
+    if (!options.key) {
+      Alert.alert('Payment Error', 'Razorpay key is missing.');
+      return;
+    }
+
     RazorpayCheckout.open(options)
       .then(data => {
-        alert(`Success: ${data.razorpay_payment_id}`);
+        Alert.alert('Success', `Payment ID: ${data.razorpay_payment_id}`);
         clearCart();
       })
       .catch(error => {
-        alert(`Error: ${error.code} | ${error.description}`);
+        Alert.alert('Payment Failed', `Code: ${error.code} | ${error.description}`);
       });
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.text}>Your Cart</Text>
-      {cartItems.length === 0 ? (
+      {validCartItems.length === 0 ? (
         <EmptyCartAnimation />
       ) : (
         <FlatList
-          data={cartItems.filter(item => item.quantity > 0)}
-          keyExtractor={item => item.id.toString()}
+          data={validCartItems}
+          keyExtractor={(item, index) => item?.id?.toString() ?? `cart-${index}`}
           renderItem={renderItem}
         />
       )}
-      {cartItems.length > 0 && (
+      {validCartItems.length > 0 && (
         <View style={styles.checkoutBox}>
           <View style={styles.totalBox}>
             <Text style={styles.text}>Total Amount</Text>
@@ -103,5 +125,3 @@ const AddToCart = () => {
 };
 
 export default AddToCart;
-
-

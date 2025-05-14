@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     top: 10,
     color: 'white',
-    height:40
+    height: 40,
   },
   email: {
     fontSize: 14,
@@ -47,7 +47,8 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: 10,
+    // marginTop: 10,
+    height: 50,
   },
   container: {
     flex: 1,
@@ -66,6 +67,7 @@ export const styles = StyleSheet.create({
   h1: {
     alignSelf: 'flex-end',
     left: 20,
+    height:50
   },
   loaderContainer: {
     flex: 1,

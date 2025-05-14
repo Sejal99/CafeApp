@@ -4,6 +4,7 @@ import React from 'react';
 
 import BottomStack from './bottomTab/bottomStack';
 import Details from '../screens/details';
+import ProfileScreen from '../screens/profile';
 
 const RootNavigator = () => {
   const Stack = createNativeStackNavigator();
@@ -19,6 +20,11 @@ const RootNavigator = () => {
         <Stack.Screen
           name={'Details'}
           component={Details}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Profile"
+          component={ProfileScreen}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
