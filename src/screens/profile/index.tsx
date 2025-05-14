@@ -63,7 +63,7 @@ const ProfileScreen = ({navigation}) => {
           <MenuItem label="Terms of Use" icon="document-text-outline" />
         </View>
 
-        {/* Logout */}
+        
         <View style={styles.footer}>
           <TouchableOpacity style={styles.logoutButton}>
             <Icon name="log-out-outline" size={20} color="#fff" />
