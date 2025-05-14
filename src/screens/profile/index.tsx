@@ -27,7 +27,6 @@ const ProfileScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
 
-        {/* Account Section */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Account</Text>
           <MenuItem
