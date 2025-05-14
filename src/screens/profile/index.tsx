@@ -47,7 +47,7 @@ const ProfileScreen = ({navigation}) => {
           />
         </View>
 
-        {/* Preferences */}
+
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Preferences</Text>
           <MenuItem label="Notifications" icon="notifications-outline" onPress={undefined} />
