@@ -55,7 +55,7 @@ const ProfileScreen = ({navigation}) => {
           <MenuItem label="Theme" icon="moon-outline" />
         </View> 
 
-        {/* Support */}
+
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Support</Text>
           <MenuItem label="Help Center" icon="help-circle-outline" />
