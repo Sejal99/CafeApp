@@ -1,5 +1,11 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, ViewStyle} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ViewStyle,
+} from 'react-native';
 
 interface AddToCartCounterProps {
   initialCount?: number;
@@ -59,6 +65,7 @@ const styles = StyleSheet.create({
     width: 120,
     alignSelf: 'flex-start',
     justifyContent: 'center',
+    height: 60,
   },
   button: {
     backgroundColor: '#D27D2D',

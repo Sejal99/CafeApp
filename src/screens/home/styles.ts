@@ -19,21 +19,25 @@ export const styles = StyleSheet.create({
   },
 
   listContainer: {
-    flex: 1,
-    top: 30,
+    // flex: 1,
+    // backgroundColor:'red',
+    // top: 30,
+    // marginVertical:20,
+    bottom:10
   },
   closeText: {
     color: 'white',
     fontWeight: 'bold',
   },
   item: {
-    marginBottom: 20,
+    // marginBottom: 20,
     backgroundColor: '#edd6cb',
     padding: 10,
     borderRadius: 10,
     flex: 1,
     marginHorizontal: 10,
     marginVertical: 20,
+    height: 210,
   },
   name: {
     fontSize: 18,
@@ -72,6 +76,8 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: 10,
+
+    height: 60,
   },
   overlayBox: {
     position: 'absolute',
@@ -129,5 +135,30 @@ export const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+  },
+  categoryContainer: {
+    marginVertical: 30,
+    // paddingLeft: 16,
+    // backgroundColor:'blue',
+    // top:40
+  },
+
+  circleBox: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: '#e0cfc1', // soft coffee tone
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+  },
+
+  circleText: {
+    fontSize: 24,
   },
 });

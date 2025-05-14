@@ -14,8 +14,6 @@ import Geolocation from 'react-native-geolocation-service';
 import {useUserStore} from '../../store/userStore';
 import {useCartStore} from '../../store/cartStore';
 import AddToCartCounter from '../../components/AddToCartCounter';
-
-import {Images} from '../../assets';
 import Header from '../../components/Header';
 import {useNavigation} from '@react-navigation/native';
 import {styles} from './styles';
@@ -32,10 +30,17 @@ const UserListScreen = () => {
   const [showMap, setShowMap] = useState(false);
   const navigation = useNavigation();
   const [locationName, setLocationName] = useState('');
+
   const handleMarkerDrag = (coords: {latitude: number; longitude: number}) => {
-    console.log('Dragged to:', coords);
     setLocation(coords);
+    Geocoder.from(coords.latitude, coords.longitude)
+      .then(response => {
+        const address = response.results[0].formatted_address;
+        setLocationName(address);
+      })
+      .catch(error => console.warn(error));
   };
+
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -146,6 +151,8 @@ const UserListScreen = () => {
     );
   };
 
+  console.log('Permission:', hasLocationPermission);
+  console.log('Location state:', location);
   return (
     <View style={styles.container}>
       <Header
@@ -155,38 +162,32 @@ const UserListScreen = () => {
         locationName={locationName}
       />
 
-      <View style={styles.overlayBox}>
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>Promo</Text>
-          <View style={styles.textView}>
-            <Text style={styles.textStyle}>Buy one get</Text>
-            <Text style={styles.textStyle}> one FREE</Text>
-          </View>
-        </View>
-        <Image source={Images.coffee} style={styles.coffeeImage} />
-      </View>
+      <>
+        <View style={styles.categoryContainer} />
 
-      <View style={styles.listContainer}>
-        {isLoading ? (
-          <View style={styles.loaderContainer}>
-            <ActivityIndicator size="large" color="#800020" />
-          </View>
-        ) : (
-          <FlatList
-            data={searchText ? filteredItems : users}
-            keyExtractor={item => item.id.toString()}
-            renderItem={renderItem}
-            contentContainerStyle={styles.list}
-            numColumns={2}
-            showsVerticalScrollIndicator={false}
-          />
-        )}
-      </View>
+        <View style={styles.listContainer}>
+          {isLoading ? (
+            <View style={styles.loaderContainer}>
+              <ActivityIndicator size="large" color="#800020" />
+            </View>
+          ) : (
+            <FlatList
+              data={searchText ? filteredItems : users}
+              keyExtractor={item => item.id.toString()}
+              renderItem={renderItem}
+              contentContainerStyle={styles.list}
+              numColumns={2}
+              showsVerticalScrollIndicator={false}
+              bounces={false}
+            />
+          )}
+        </View>
+      </>
       {showMap && location && (
         <View style={styles.map}>
           <CustomMapView
-            latitude={location.latitude}
-            longitude={location.longitude}
+            latitude={28.679079}
+            longitude={77.06971}
             markerTitle="You are here"
             markerDescription="This is your current location"
             onMarkerDrag={handleMarkerDrag}

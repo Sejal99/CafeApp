@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -11,18 +11,34 @@ import {
 import {Images} from '../assets';
 import {useNavigation} from '@react-navigation/native';
 
+const rotatingPlaceholders = [
+  'Search for coffee',
+  'Search for latte',
+  'Search for espresso',
+  'Search for mocha',
+  'Search for cappuccino',
+];
+
 const Header = ({
   searchText,
   onChangeSearch,
   onLocationPress,
   locationName,
 }: {
-  searchText: string; 
+  searchText: string;
   onChangeSearch: (text: string) => void;
   onLocationPress: () => void;
   locationName: string;
 }) => {
   const navigation = useNavigation();
+  const [placeholderIndex, setPlaceholderIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPlaceholderIndex(prev => (prev + 1) % rotatingPlaceholders.length);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleGoToCart = () => {
     navigation.navigate('AddToCart');
@@ -50,12 +66,22 @@ const Header = ({
       <View style={styles.searchContainer}>
         <Image source={Images.searchIcon} style={styles.searchIcon} />
         <TextInput
-          placeholder="Search"
+          placeholder={rotatingPlaceholders[placeholderIndex]}
           style={styles.searchInput}
           placeholderTextColor="#999"
           value={searchText}
           onChangeText={onChangeSearch}
         />
+      </View>
+      <View style={styles.overlayBox}>
+        <View style={styles.textContainer}>
+          <Text style={styles.text}>Promo</Text>
+          <View style={styles.textView}>
+            <Text style={styles.textStyle}>Buy one get</Text>
+            <Text style={styles.textStyle}> one FREE</Text>
+          </View>
+        </View>
+        <Image source={Images.coffee} style={styles.coffeeImage} />
       </View>
     </SafeAreaView>
   );
@@ -64,6 +90,48 @@ const Header = ({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#451800',
+  },
+  textView: {
+    alignItems: 'center',
+    marginHorizontal: 10,
+    top: 10,
+  },
+  textStyle: {
+    left: 20,
+    fontSize: 20,
+    fontWeight: 600,
+    color: '#80461B',
+  },
+  overlayBox: {
+    position: 'absolute',
+    top: 230,
+    alignSelf: 'center',
+    height: 100,
+    width: 300,
+    backgroundColor: '#F2D2BD',
+    borderRadius: 10,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    // zIndex: 1,
+  },
+  coffeeImage: {
+    width: 110,
+    height: 102,
+    resizeMode: 'cover',
+    borderTopRightRadius: 10,
+    borderBottomRightRadius: 10,
+  },
+  text: {
+    backgroundColor: 'red',
+    color: 'white',
+    width: 50,
+    textAlign: 'center',
+    borderRadius: 3,
+    right: 10,
+  },
+  textContainer: {
+    marginVertical: 10,
+    alignItems: 'center',
   },
   map: {
     height: 300,
@@ -87,9 +155,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginLeft: 10,
   },
-  text: {
-    flexDirection: 'column',
-  },
+  // text: {
+  //   flexDirection: 'column',
+  // },
   location: {
     color: 'white',
     fontSize: 20,
@@ -130,7 +198,7 @@ const styles = StyleSheet.create({
   searchInput: {
     flex: 1,
     height: 40,
-    fontSize: 16,
+    fontSize: 14,
     color: '#000',
   },
 });
