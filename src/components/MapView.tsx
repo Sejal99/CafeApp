@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import MapView, {LatLng, Marker} from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 
 const CustomMapView = ({
   latitude,
@@ -25,7 +25,7 @@ const CustomMapView = ({
         }}
         showsUserLocation={true}
         followsUserLocation={true}>
-        <Marker 
+        <Marker
           coordinate={{latitude, longitude}}
           title="Selected Location"
           description="This is your pinned location"

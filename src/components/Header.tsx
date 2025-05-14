@@ -17,7 +17,7 @@ const Header = ({
   onLocationPress,
   locationName,
 }: {
-  searchText: string;
+  searchText: string; 
   onChangeSearch: (text: string) => void;
   onLocationPress: () => void;
   locationName: string;

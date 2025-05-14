@@ -16,7 +16,7 @@ const Details = () => {
   const route = useRoute();
   const {item} = route.params || {};
   const navigation = useNavigation();
-  const [isToggle, setIsToggle] = useState(false);
+  const [] = useState(false);
 
   const toggleFavorite = useFavoritesStore(state => state.toggleFavorite);
   const isFavorite = useFavoritesStore(state => state.isFavorite(item.id));

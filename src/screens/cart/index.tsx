@@ -1,5 +1,5 @@
 import {View, Text, FlatList, Image, TouchableOpacity} from 'react-native';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useCartStore} from '../../store/cartStore';
 import {styles} from './styles';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -103,3 +103,5 @@ const AddToCart = () => {
 };
 
 export default AddToCart;
+
+

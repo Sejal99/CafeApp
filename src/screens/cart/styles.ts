@@ -69,7 +69,6 @@ export const styles = StyleSheet.create({
   },
   box: {
     width: 120,
-    // marginTop: 10,
     marginHorizontal: 60,
   },
 

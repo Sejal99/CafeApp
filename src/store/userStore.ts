@@ -14,7 +14,7 @@ export const useUserStore = create(set => ({
 
   fetchUsers: async () => {
     const now = Date.now();
-    if (now - lastFetchUsers < RATE_LIMIT_MS)  {
+    if (now - lastFetchUsers < RATE_LIMIT_MS) {
       return;
     }
     lastFetchUsers = now;
@@ -39,7 +39,9 @@ export const useFetchMenu = create(set => ({
 
   fetchMenu: async () => {
     const now = Date.now();
-    if (now - lastFetchMenu < RATE_LIMIT_MS) {return;}
+    if (now - lastFetchMenu < RATE_LIMIT_MS) {
+      return;
+    }
     lastFetchMenu = now;
 
     set({isLoading: true, error: null});
@@ -63,13 +65,14 @@ export const useMenu = create(set => ({
 
   fetchMenuItems: async () => {
     const now = Date.now();
-    if (now - lastFetchMenuItems < RATE_LIMIT_MS) return;
+    if (now - lastFetchMenuItems < RATE_LIMIT_MS) {return;}
     lastFetchMenuItems = now;
 
     set({isLoading: true, error: null});
     try {
       const response = await axios.get('https://dummyjson.com/recipes');
       console.log('erererer', response.data.recipes);
+
       set({menuItems: response.data.recipes, isLoading: false});
     } catch (error) {
       console.error('Failed to fetch items:', error);

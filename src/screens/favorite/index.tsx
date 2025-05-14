@@ -7,7 +7,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {Images} from '../../assets';
 
 const Favorite = ({navigation}) => {
-  const favorites = useFavoritesStore(state => state.favorites);
+  const favorites = useFavoritesStore((state: { favorites: any; }) => state.favorites);
 
   return (
     <SafeAreaView style={styles.container}>

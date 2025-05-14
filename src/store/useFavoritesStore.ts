@@ -32,5 +32,5 @@ export const useFavoritesStore = create<FavoritesStore>(set => ({
       }
     }),
   isFavorite: id =>
-    !!useFavoritesStore.getState().favorites.find(item => item.id === id),
+    !!useFavoritesStore.getState().favorites.find((item: { id: string; }) => item.id === id),
 }));
