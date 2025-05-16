@@ -1,78 +1,87 @@
-☕ Coffee Shop App
+# ☕ Coffee Shop App
 
-A modern Coffee Shop mobile application built using React Native, with state management powered by Zustand, Google Maps for location tracking, and Razorpay for secure payments.
+A modern Coffee Shop mobile application built using **React Native**, with state management powered by **Zustand**, Google Maps for location tracking, and Razorpay for secure payments.
 
-🚀 Features
+## 🚀 Features
 
-Coffee Menu: Browse a wide selection of coffee options.
+* **Coffee Menu:** Browse a wide selection of coffee options.
+* **Google Maps Integration:** Locate nearby coffee shops effortlessly.
+* **Secure Payments:** Use Razorpay for safe and seamless transactions.
+* **Cart Management:** Add items to the cart and manage orders easily.
+* **Search Functionality:** Quickly find your favorite coffee items.
+* **Order History:** Keep track of all your past orders.
+* **User Authentication (Optional):** Secure user login and registration.
 
-Google Maps Integration: Locate nearby coffee shops effortlessly.
+---
 
-Secure Payments: Use Razorpay for safe and seamless transactions.
+## 📋 Prerequisites
 
-Cart Management: Add items to the cart and manage orders easily.
+* **Node.js:** >= 14.x
+* **npm or yarn**
+* **React Native CLI**
+* **Android Studio or Xcode** (for emulator/simulator)
 
-Search Functionality: Quickly find your favorite coffee items.
+---
 
-Order History: Keep track of all your past orders.
+## ⚡ Installation
 
-User Authentication (Optional): Secure user login and registration.
+1. **Clone the repository:**
 
-📋 Prerequisites
+   ```bash
+   git clone https://github.com/Sejal99/Zustand.git
+   cd Zustand
+   ```
 
-Node.js: >= 14.x
+2. **Install dependencies:**
 
-npm or yarn
+   ```bash
+   npm install
+   # or
+   yarn install
+   ```
 
-React Native CLI
+3. **Set up environment variables:**
 
-Android Studio or Xcode (for emulator/simulator)
+   * Create a `.env` file in the root directory.
+   * Add your API keys:
 
-⚡ Installation
+     ```bash
+     GOOGLE_MAPS_API_KEY=your_google_maps_api_key
+     RAZORPAY_KEY_ID=your_razorpay_key_id
+     RAZORPAY_KEY_SECRET=your_razorpay_key_secret
+     ```
 
-Clone the repository:
+4. **Start the Metro bundler:**
 
-git clone https://github.com/Sejal99/Zustand.git
-cd Zustand
+   ```bash
+   npm start
+   # or
+   yarn start
+   ```
 
-Install dependencies:
+5. **Run the application:**
 
-npm install
-# or
-yarn install
+   * For Android:
 
-Set up environment variables:
+     ```bash
+     npm run android
+     # or
+     yarn android
+     ```
 
-Create a .env file in the root directory.
+   * For iOS:
 
-Add your API keys:
+     ```bash
+     npm run ios
+     # or
+     yarn ios
+     ```
 
-GOOGLE_MAPS_API_KEY=your_google_maps_api_key
-RAZORPAY_KEY_ID=your_razorpay_key_id
-RAZORPAY_KEY_SECRET=your_razorpay_key_secret
+---
 
-Start the Metro bundler:
+## 📁 Project Structure
 
-npm start
-# or
-yarn start
-
-Run the application:
-
-For Android:
-
-npm run android
-# or
-yarn android
-
-For iOS:
-
-npm run ios
-# or
-yarn ios
-
-📁 Project Structure
-
+```
 Zustand/
 ├── android/
 ├── ios/
@@ -85,17 +94,31 @@ Zustand/
 ├── .env (Environment variables)
 ├── package.json
 └── ...
+```
 
-🎮 Usage
+---
 
-Explore the coffee menu and add items to your cart.
+## 🎮 Usage
 
-Use Google Maps to locate nearby coffee shops.
+* Explore the coffee menu and add items to your cart.
+* Use Google Maps to locate nearby coffee shops.
+* Make secure payments using Razorpay.
+* Manage and track your order history.
 
-Make secure payments using Razorpay.
+---
 
-Manage and track your order history.
-
-🤝 Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Please fork this repository and create a pull request with your enhancements.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 📞 Support
+
+For any issues or questions, please open an issue on the GitHub repository or reach out to the project maintainers.
