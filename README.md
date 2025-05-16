@@ -113,12 +113,4 @@ Contributions are welcome! Please fork this repository and create a pull request
 
 ---
 
-## 📄 License
 
-This project is licensed under the MIT License.
-
----
-
-## 📞 Support
-
-For any issues or questions, please open an issue on the GitHub repository or reach out to the project maintainers.
