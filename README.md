@@ -98,6 +98,17 @@ Zustand/
 
 ---
 
+## 📸 Screenshots
+<img width="1080" height="2400" alt="Screenshot_1767166095" src="htt<img width="1080" height="2400" alt="Screenshot_1767166926" src="https://github.com/user-attachments/assets/a1ebdaf0-2a24-47db-a99a-e6df9f12f012" />
+ps://github.com/user-attachments/assets/1f92204f-fdcc-4ed8-b853-3957e50235fe" /><img width="1080" height="2400" alt="Screenshot_1767166381" src="https://github.com/user-attachments/assets/b4d81bc9-262e-4f69-8a17-6a62e0e0c3ca" />
+
+<img width="1080" height="2400" alt="Screenshot_1767166773" src="https://github.com/user-attachments/assets/badac80b-43b4-46f2-82a8-2335159995e5" /><img width="1080" height="2400" alt="Screenshot_1767167022" src="https://github.com/user-attachments/assets/c987e9e2-c155-459d-8ecf-036596461579" <img width="720" height<img width="1080" height="2400" alt="Screenshot_1767166931" src="https://github.com/user-attachments/assets/48aaf21a-bb35-4fff-adb7-530e944b549c" />
+="1600" alt="Screenshot_1767163179" src="https://github.com/user-attachments/assets/bf050e93-ab32-41c3-890e-1655494625e2" />
+/>
+
+
+
+
 ## 🎮 Usage
 
 * Explore the coffee menu and add items to your cart.
