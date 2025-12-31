@@ -1,6 +1,8 @@
 # ☕ Coffee Shop App
 
-A modern Coffee Shop mobile application built using **React Native**, with state management powered by **Zustand**, Google Maps for location tracking, and Razorpay for secure payments.
+This project is a mobile application built using React Native, providing a comprehensive solution for users to navigate through various screens, manage their cart, and interact with favorite items. The application features a robust navigation system utilizing React Navigation and leverages Zustand for efficient state management.
+It includes a counter store, user store, cart store, and favorites store, ensuring a seamless and scalable user experience.
+Additionally, the app implements rate limiting to control request frequency, enhance performance, and protect backend services from excessive or abusive API calls.
 
 ## 🚀 Features
 
