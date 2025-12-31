@@ -33,6 +33,7 @@ const Header = ({
   const navigation = useNavigation();
   const [placeholderIndex, setPlaceholderIndex] = useState(0);
   
+
   useEffect(() => {
     const interval = setInterval(() => {
       setPlaceholderIndex(prev => (prev + 1) % rotatingPlaceholders.length);
